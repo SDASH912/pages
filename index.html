@@ -4,88 +4,385 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kaspi Курстары</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
-        header { background: #0071bc; color: white; padding: 15px; text-align: center; font-size: 24px; }
-        nav { text-align: center; padding: 10px; background: #ddd; }
-        nav a { margin: 0 15px; text-decoration: none; color: #333; font-size: 18px; }
-        .container { padding: 20px; max-width: 800px; margin: auto; background: white; }
-        .module { padding: 15px; border-bottom: 1px solid #ddd; }
-        .module h2 { color: #0071bc; }
+        :root {
+            --primary: #FF6B35;
+            --secondary: #F7C59F;
+            --dark: #2E282A;
+            --light: #FFF9F2;
+            --accent: #E84855;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NiIgaGVpZ2h0PSIxMDAiPgo8cmVjdCB3aWR0aD0iNTYiIGhlaWdodD0iMTAwIiBmaWxsPSIjZmZmZmZmIj48L3JlY3Q+CjxwYXRoIGQ9Ik0yOCA2NkwwIDUwTDAgMTZMMjggMEw1NiAxNkw1NiA1MEwyOCA2NkwyOCAxMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2ZmZmZmZiIgc3Ryb2tlLXdpZHRoPSIyIj48L3BhdGg+CjxwYXRoIGQ9Ik0yOCAwTDI4IDY2TDAgNTBMMCA1MEwwIDE2TDAgMTZMMjggMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjIiPjwvcGF0aD4KPC9zdmc+');
+        }
+        
+        nav {
+            background-color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding: 0 1rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 1rem;
+        }
+        
+        nav a:hover {
+            background-color: var(--secondary);
+            color: var(--dark);
+            transform: translateY(-2px);
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .module-card {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+        }
+        
+        .module-header {
+            background: linear-gradient(to right, var(--secondary), var(--light));
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .module-header:hover {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+        }
+        
+        .module-header h2 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .module-header i {
+            font-size: 1.2rem;
+        }
+        
+        .module-content {
+            max-height: 0;
+            overflow: hidden;
+            padding: 0 1.5rem;
+        }
+        
+        .module-content.active {
+            max-height: 500px;
+            padding: 1.5rem;
+        }
+        
+        .module-content ul {
+            list-style-type: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+        
+        .module-content li {
+            background-color: var(--light);
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .module-content li:before {
+            content: "•";
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .module-content li:hover {
+            background-color: var(--secondary);
+            transform: translateX(5px);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .icon-rotate {
+            transform: rotate(180deg);
+        }
+        
+        @media (max-width: 768px) {
+            .module-content ul {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            nav a {
+                font-size: 0.9rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <header>Kaspi Курстары</header>
+    <header>
+        <div class="header-bg"></div>
+        <div class="header-content">
+            <h1>Kaspi Курстары</h1>
+            <p>Бизнес дағдыларыңызды дамытыңыз</p>
+        </div>
+    </header>
+    
     <nav>
-        <a href="#module1">1-Модуль</a>
-        <a href="#module2">2-Модуль</a>
-        <a href="#module3">3-Модуль</a>
-        <a href="#module4">4-Модуль</a>
-        <a href="#module5">5-Модуль</a>
-        <a href="#bonus">Бонус</a>
+        <div class="nav-container">
+            <a href="#module1">1-Модуль</a>
+            <a href="#module2">2-Модуль</a>
+            <a href="#module3">3-Модуль</a>
+            <a href="#module4">4-Модуль</a>
+            <a href="#module5">5-Модуль</a>
+            <a href="#bonus">Бонус</a>
+        </div>
     </nav>
+    
     <div class="container">
-        <div class="module" id="module1">
-            <h2>1-Модуль: Бизнеске кіріспе</h2>
-            <ul>
-                <li>Танысу</li>
-                <li>Жауапкершілік</li>
-                <li>Арман Мақсат жазу</li>
-                <li>ИП ашу</li>
-                <li>Kaspi pay регистрация жасау</li>
-                <li>Kaspi магазинге одобрение алу жолдары</li>
-                <li>Kaspi касса қосу</li>
-                <li>ИП налогтары от и до</li>
-            </ul>
+        <div class="module-card" id="module1">
+            <div class="module-header">
+                <h2><i class="fas fa-rocket"></i> 1-Модуль: Бизнеске кіріспе</h2>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="module-content">
+                <ul>
+                    <li>Танысу</li>
+                    <li>Жауапкершілік</li>
+                    <li>Арман Мақсат жазу</li>
+                    <li>ИП ашу</li>
+                    <li>Kaspi pay регистрация жасау</li>
+                    <li>Kaspi магазинге одобрение алу жолдары</li>
+                    <li>Kaspi касса қосу</li>
+                    <li>ИП налогтары от и до</li>
+                </ul>
+            </div>
         </div>
-        <div class="module" id="module2">
-            <h2>2-Модуль: Тауар таңдау және сатып алу</h2>
-            <ul>
-                <li>Ашық категория және жабық категория</li>
-                <li>Анализ жасау</li>
-                <li>Маржа есептеу</li>
-                <li>Закуп жасау</li>
-                <li>Алипей регистрация</li>
-                <li>1688 регистрация</li>
-                <li>Пиндуодо</li>
-            </ul>
+        
+        <div class="module-card" id="module2">
+            <div class="module-header">
+                <h2><i class="fas fa-shopping-cart"></i> 2-Модуль: Тауар таңдау және сатып алу</h2>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="module-content">
+                <ul>
+                    <li>Ашық категория және жабық категория</li>
+                    <li>Анализ жасау</li>
+                    <li>Маржа есептеу</li>
+                    <li>Закуп жасау</li>
+                    <li>Алипей регистрация</li>
+                    <li>1688 регистрация</li>
+                    <li>Пиндуодо</li>
+                </ul>
+            </div>
         </div>
-        <div class="module" id="module3">
-            <h2>3-Модуль: Kaspi дүкен басқару</h2>
-            <ul>
-                <li>Кaspi магазин ашылды</li>
-                <li>Кабинет настройкасын жасау</li>
-                <li>Магазин аты, Логотип</li>
-                <li>Доставка түрлерін қосу</li>
-                <li>Товар салудың 2 түрі</li>
-                <li>Демпинг</li>
-                <li>Упаковка ережелері</li>
-            </ul>
+        
+        <div class="module-card" id="module3">
+            <div class="module-header">
+                <h2><i class="fas fa-store"></i> 3-Модуль: Kaspi дүкен басқару</h2>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="module-content">
+                <ul>
+                    <li>Кaspi магазин ашылды</li>
+                    <li>Кабинет настройкасын жасау</li>
+                    <li>Магазин аты, Логотип</li>
+                    <li>Доставка түрлерін қосу</li>
+                    <li>Товар салудың 2 түрі</li>
+                    <li>Демпинг</li>
+                    <li>Упаковка ережелері</li>
+                </ul>
+            </div>
         </div>
-        <div class="module" id="module4">
-            <h2>4-Модуль: Жылдам сату</h2>
-            <ul>
-                <li>Предзаказ Таблицамен</li>
-                <li>Предзаказ ботпен</li>
-                <li>Маркетинг</li>
-                <li>Быстрые продажи</li>
-            </ul>
+        
+        <div class="module-card" id="module4">
+            <div class="module-header">
+                <h2><i class="fas fa-bolt"></i> 4-Модуль: Жылдам сату</h2>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="module-content">
+                <ul>
+                    <li>Предзаказ Таблицамен</li>
+                    <li>Предзаказ ботпен</li>
+                    <li>Маркетинг</li>
+                    <li>Быстрые продажи</li>
+                </ul>
+            </div>
         </div>
-        <div class="module" id="module5">
-            <h2>5-Модуль: Қателіктерден сақтану</h2>
-            <ul>
-                <li>Жасауға болмайтын қателіктер</li>
-                <li>Возвраттар, отмена</li>
-                <li>Компенсация алу</li>
-            </ul>
+        
+        <div class="module-card" id="module5">
+            <div class="module-header">
+                <h2><i class="fas fa-shield-alt"></i> 5-Модуль: Қателіктерден сақтану</h2>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="module-content">
+                <ul>
+                    <li>Жасауға болмайтын қателіктер</li>
+                    <li>Возвраттар, отмена</li>
+                    <li>Компенсация алу</li>
+                </ul>
+            </div>
         </div>
-        <div class="module" id="bonus">
-            <h2>Бонус</h2>
-            <ul>
-                <li>Поставщиктер каналы</li>
-                <li>100 Топ Ниша</li>
-            </ul>
+        
+        <div class="module-card" id="bonus">
+            <div class="module-header">
+                <h2><i class="fas fa-gift"></i> Бонус</h2>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="module-content">
+                <ul>
+                    <li>Поставщиктер каналы</li>
+                    <li>100 Топ Ниша</li>
+                </ul>
+            </div>
         </div>
     </div>
+    
+    <footer>
+        <p>© 2025 Kaspi Курстары. Барлық құқықтар қорғалған.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle module click to expand/collapse
+            const moduleHeaders = document.querySelectorAll('.module-header');
+            
+            moduleHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector('.fa-chevron-down');
+                    
+                    content.classList.toggle('active');
+                    icon.classList.toggle('icon-rotate');
+                    
+                    // Close other modules
+                    document.querySelectorAll('.module-content').forEach(item => {
+                        if (item !== content && item.classList.contains('active')) {
+                            item.classList.remove('active');
+                            item.previousElementSibling.querySelector('.fa-chevron-down').classList.remove('icon-rotate');
+                        }
+                    });
+                });
+            });
+            
+            // Smooth scroll for navigation
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Open the target module
+                    setTimeout(() => {
+                        const content = targetElement.querySelector('.module-content');
+                        const icon = targetElement.querySelector('.fa-chevron-down');
+                        
+                        if (!content.classList.contains('active')) {
+                            content.classList.add('active');
+                            icon.classList.add('icon-rotate');
+                        }
+                    }, 500);
+                });
+            });
+            
+            // Open the first module by default
+            const firstModule = document.querySelector('.module-content');
+            const firstIcon = document.querySelector('.module-header .fa-chevron-down');
+            firstModule.classList.add('active');
+            firstIcon.classList.add('icon-rotate');
+        });
+    </script>
 </body>
 </html>
