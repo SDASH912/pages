@@ -234,7 +234,7 @@
         }
         
         .module-content.active {
-            max-height: 2000px; /* Increased to accommodate video player */
+            max-height: 800px;
             padding: 1.5rem;
         }
         
@@ -255,8 +255,6 @@
             font-weight: 500;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
             border: 1px solid rgba(255, 87, 34, 0.05);
-            cursor: pointer;
-            position: relative;
         }
         
         .module-content li:before {
@@ -271,15 +269,6 @@
             background: linear-gradient(135deg, var(--light), var(--secondary));
             transform: translateX(8px);
             box-shadow: 0 6px 20px rgba(255, 87, 34, 0.1);
-        }
-        
-        .module-content li.has-video:after {
-            content: "\f144";
-            font-family: "Font Awesome 6 Free";
-            position: absolute;
-            right: 15px;
-            color: var(--primary);
-            font-size: 1.2rem;
         }
         
         footer {
@@ -341,121 +330,6 @@
         
         .floating {
             animation: float 6s ease-in-out infinite;
-        }
-        
-        /* Video Modal Styles */
-        .video-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 20px;
-        }
-        
-        .video-container {
-            width: 100%;
-            max-width: 900px;
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        .video-player {
-            width: 100%;
-            background-color: #000;
-            border-radius: 12px;
-        }
-        
-        .close-video {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            color: white;
-            background: rgba(255, 87, 34, 0.8);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 1001;
-            font-size: 1.2rem;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        .close-video:hover {
-            background: var(--primary);
-            transform: scale(1.1);
-        }
-        
-        .video-title {
-            color: white;
-            margin-bottom: 20px;
-            font-size: 1.5rem;
-            text-align: center;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* Custom Video Controls */
-        .video-controls {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(45, 49, 66, 0.8);
-            padding: 10px 15px;
-            border-radius: 0 0 12px 12px;
-        }
-        
-        .control-button {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            transition: all 0.3s ease;
-        }
-        
-        .control-button:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        
-        .progress-container {
-            flex-grow: 1;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 4px;
-            margin: 0 15px;
-            cursor: pointer;
-            position: relative;
-        }
-        
-        .progress-bar {
-            height: 100%;
-            background: var(--primary);
-            border-radius: 4px;
-            width: 0;
-        }
-        
-        .time-display {
-            color: white;
-            font-size: 0.9rem;
-            margin-left: 10px;
-            font-family: monospace;
         }
         
         /* Mobile Responsive Styles */
@@ -525,30 +399,6 @@
                 margin-bottom: 1rem;
                 border-radius: 18px;
             }
-            
-            .video-title {
-                font-size: 1.2rem;
-                margin-bottom: 15px;
-            }
-            
-            .video-controls {
-                padding: 8px 10px;
-            }
-            
-            .control-button {
-                width: 36px;
-                height: 36px;
-                font-size: 1rem;
-            }
-            
-            .progress-container {
-                margin: 0 10px;
-                height: 6px;
-            }
-            
-            .time-display {
-                font-size: 0.8rem;
-            }
         }
         
         @media (max-width: 480px) {
@@ -574,21 +424,6 @@
                 padding: 0.1rem 0.4rem;
                 top: -8px;
                 right: -8px;
-            }
-            
-            .close-video {
-                width: 35px;
-                height: 35px;
-                font-size: 1rem;
-            }
-            
-            .video-title {
-                font-size: 1.1rem;
-            }
-            
-            .control-button {
-                width: 32px;
-                height: 32px;
             }
         }
     </style>
@@ -623,14 +458,14 @@
             </div>
             <div class="module-content">
                 <ul>
-                    <li class="has-video" data-video="https://example.com/videos/tanysu.mp4" data-title="Танысу">Танысу</li>
-                    <li class="has-video" data-video="https://example.com/videos/zhauapkershilik.mp4" data-title="Жауапкершілік">Жауапкершілік</li>
-                    <li class="has-video" data-video="https://example.com/videos/arman.mp4" data-title="Арман Мақсат жазу">Арман Мақсат жазу</li>
-                    <li class="has-video" data-video="https://example.com/videos/ip.mp4" data-title="ИП ашу">ИП ашу</li>
-                    <li class="has-video" data-video="https://example.com/videos/kaspipay.mp4" data-title="Kaspi pay регистрация жасау">Kaspi pay регистрация жасау</li>
-                    <li class="has-video new-item" data-video="https://example.com/videos/odobrenie.mp4" data-title="Kaspi магазинге одобрение алу жолдары">Kaspi магазинге одобрение алу жолдары</li>
-                    <li class="has-video" data-video="https://example.com/videos/kassa.mp4" data-title="Kaspi касса қосу">Kaspi касса қосу</li>
-                    <li class="has-video" data-video="https://example.com/videos/nalogi.mp4" data-title="ИП налогтары от и до">ИП налогтары от и до</li>
+                    <li>Танысу</li>
+                    <li>Жауапкершілік</li>
+                    <li>Арман Мақсат жазу</li>
+                    <li>ИП ашу</li>
+                    <li>Kaspi pay регистрация жасау</li>
+                    <li class="new-item">Kaspi магазинге одобрение алу жолдары</li>
+                    <li>Kaspi касса қосу</li>
+                    <li>ИП налогтары от и до</li>
                 </ul>
             </div>
         </div>
@@ -642,13 +477,13 @@
             </div>
             <div class="module-content">
                 <ul>
-                    <li class="has-video" data-video="https://example.com/videos/kategoriya.mp4" data-title="Ашық категория және жабық категория">Ашық категория және жабық категория</li>
-                    <li class="has-video" data-video="https://example.com/videos/analiz.mp4" data-title="Анализ жасау">Анализ жасау</li>
-                    <li class="has-video" data-video="https://example.com/videos/marzha.mp4" data-title="Маржа есептеу">Маржа есептеу</li>
-                    <li class="has-video" data-video="https://example.com/videos/zakup.mp4" data-title="Закуп жасау">Закуп жасау</li>
-                    <li class="has-video new-item" data-video="https://example.com/videos/alipay.mp4" data-title="Алипей регистрация">Алипей регистрация</li>
-                    <li class="has-video" data-video="https://example.com/videos/1688.mp4" data-title="1688 регистрация">1688 регистрация</li>
-                    <li class="has-video" data-video="https://example.com/videos/pinduodo.mp4" data-title="Пиндуодо">Пиндуодо</li>
+                    <li>Ашық категория және жабық категория</li>
+                    <li>Анализ жасау</li>
+                    <li>Маржа есептеу</li>
+                    <li>Закуп жасау</li>
+                    <li class="new-item">Алипей регистрация</li>
+                    <li>1688 регистрация</li>
+                    <li>Пиндуодо</li>
                 </ul>
             </div>
         </div>
@@ -660,13 +495,13 @@
             </div>
             <div class="module-content">
                 <ul>
-                    <li class="has-video" data-video="https://example.com/videos/magazin.mp4" data-title="Кaspi магазин ашылды">Кaspi магазин ашылды</li>
-                    <li class="has-video" data-video="https://example.com/videos/kabinet.mp4" data-title="Кабинет настройкасын жасау">Кабинет настройкасын жасау</li>
-                    <li class="has-video" data-video="https://example.com/videos/logo.mp4" data-title="Магазин аты, Логотип">Магазин аты, Логотип</li>
-                    <li class="has-video" data-video="https://example.com/videos/dostavka.mp4" data-title="Доставка түрлерін қосу">Доставка түрлерін қосу</li>
-                    <li class="has-video" data-video="https://example.com/videos/tovar.mp4" data-title="Товар салудың 2 түрі">Товар салудың 2 түрі</li>
-                    <li class="has-video" data-video="https://example.com/videos/demping.mp4" data-title="Демпинг">Демпинг</li>
-                    <li class="has-video" data-video="https://example.com/videos/upakovka.mp4" data-title="Упаковка ережелері">Упаковка ережелері</li>
+                    <li>Кaspi магазин ашылды</li>
+                    <li>Кабинет настройкасын жасау</li>
+                    <li>Магазин аты, Логотип</li>
+                    <li>Доставка түрлерін қосу</li>
+                    <li>Товар салудың 2 түрі</li>
+                    <li>Демпинг</li>
+                    <li>Упаковка ережелері</li>
                 </ul>
             </div>
         </div>
@@ -678,10 +513,10 @@
             </div>
             <div class="module-content">
                 <ul>
-                    <li class="has-video" data-video="https://example.com/videos/predzakaz1.mp4" data-title="Предзаказ Таблицамен">Предзаказ Таблицамен</li>
-                    <li class="has-video" data-video="https://example.com/videos/predzakaz2.mp4" data-title="Предзаказ ботпен">Предзаказ ботпен</li>
-                    <li class="has-video new-item" data-video="https://example.com/videos/marketing.mp4" data-title="Маркетинг">Маркетинг</li>
-                    <li class="has-video" data-video="https://example.com/videos/bystrye.mp4" data-title="Быстрые продажи">Быстрые продажи</li>
+                    <li>Предзаказ Таблицамен</li>
+                    <li>Предзаказ ботпен</li>
+                    <li class="new-item">Маркетинг</li>
+                    <li>Быстрые продажи</li>
                 </ul>
             </div>
         </div>
@@ -693,9 +528,9 @@
             </div>
             <div class="module-content">
                 <ul>
-                    <li class="has-video" data-video="https://example.com/videos/oshibki.mp4" data-title="Жасауға болмайтын қателіктер">Жасауға болмайтын қателіктер</li>
-                    <li class="has-video" data-video="https://example.com/videos/vozvrat.mp4" data-title="Возвраттар, отмена">Возвраттар, отмена</li>
-                    <li class="has-video" data-video="https://example.com/videos/kompensaciya.mp4" data-title="Компенсация алу">Компенсация алу</li>
+                    <li>Жасауға болмайтын қателіктер</li>
+                    <li>Возвраттар, отмена</li>
+                    <li>Компенсация алу</li>
                 </ul>
             </div>
         </div>
@@ -707,5 +542,224 @@
             </div>
             <div class="module-content">
                 <ul>
-                    <li class="has-video" data-video="https://example.com/videos/postavshiki.mp4" data-title="Поставщиктер каналы">Поставщиктер каналы</li>
-                    <li class="has-video new-item" data-video="https://example.com/videos/nisha.mp4" data-
+                    <li>Поставщиктер каналы</li>
+                    <li class="new-item">100 Топ Ниша</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2025 Kaspi Курстары. Барлық құқықтар қорғалған.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Fluid animation for header background
+            const canvas = document.getElementById('fluid-canvas');
+            const ctx = canvas.getContext('2d');
+            let width, height;
+            
+            // Set canvas dimensions
+            function resize() {
+                width = canvas.width = canvas.offsetWidth;
+                height = canvas.height = canvas.offsetHeight;
+            }
+            
+            window.addEventListener('resize', resize);
+            resize();
+            
+            // Fluid simulation parameters
+            const particles = [];
+            const particleCount = Math.min(50, Math.floor(width / 20)); // Reduce particles on small screens
+            const colors = ['#FF9800', '#FF5722', '#FF3D00', '#FFAB91'];
+            
+            // Create particles
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 20 + 10,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    vx: Math.random() * 2 - 1,
+                    vy: Math.random() * 2 - 1,
+                    opacity: Math.random() * 0.5 + 0.2
+                });
+            }
+            
+            // Animation loop
+            function animate() {
+                // Clear canvas with semi-transparent background for trail effect
+                ctx.fillStyle = 'rgba(255, 87, 34, 0.03)';
+                ctx.fillRect(0, 0, width, height);
+                
+                // Update and draw particles
+                particles.forEach(particle => {
+                    // Move particle
+                    particle.x += particle.vx;
+                    particle.y += particle.vy;
+                    
+                    // Bounce off edges
+                    if (particle.x < 0 || particle.x > width) particle.vx *= -1;
+                    if (particle.y < 0 || particle.y > height) particle.vy *= -1;
+                    
+                    // Draw particle
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = particle.color;
+                    ctx.globalAlpha = particle.opacity;
+                    ctx.fill();
+                    
+                    // Add glow effect
+                    const gradient = ctx.createRadialGradient(
+                        particle.x, particle.y, 0,
+                        particle.x, particle.y, particle.radius * 2
+                    );
+                    gradient.addColorStop(0, particle.color);
+                    gradient.addColorStop(1, 'rgba(255, 87, 34, 0)');
+                    
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.radius * 2, 0, Math.PI * 2);
+                    ctx.fillStyle = gradient;
+                    ctx.globalAlpha = particle.opacity * 0.3;
+                    ctx.fill();
+                    
+                    // Reset opacity
+                    ctx.globalAlpha = 1;
+                    
+                    // Slightly change direction randomly
+                    if (Math.random() > 0.95) {
+                        particle.vx += (Math.random() * 0.4 - 0.2);
+                        particle.vy += (Math.random() * 0.4 - 0.2);
+                    }
+                    
+                    // Limit velocity
+                    const maxVel = 1.5;
+                    const vel = Math.sqrt(particle.vx * particle.vx + particle.vy * particle.vy);
+                    if (vel > maxVel) {
+                        particle.vx = (particle.vx / vel) * maxVel;
+                        particle.vy = (particle.vy / vel) * maxVel;
+                    }
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            
+            // Start animation
+            animate();
+            
+            // Handle module click to expand/collapse
+            const moduleHeaders = document.querySelectorAll('.module-header');
+            
+            moduleHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const moduleCard = this.parentElement;
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector('.toggle-icon');
+                    
+                    content.classList.toggle('active');
+                    icon.classList.toggle('icon-rotate');
+                    moduleCard.classList.toggle('active');
+                    
+                    // Close other modules
+                    document.querySelectorAll('.module-content').forEach(item => {
+                        if (item !== content && item.classList.contains('active')) {
+                            item.classList.remove('active');
+                            item.previousElementSibling.querySelector('.toggle-icon').classList.remove('icon-rotate');
+                            item.parentElement.classList.remove('active');
+                        }
+                    });
+                    
+                    // Add subtle animation to list items when opening
+                    if (content.classList.contains('active')) {
+                        const listItems = content.querySelectorAll('li');
+                        listItems.forEach((item, index) => {
+                            item.style.opacity = '0';
+                            item.style.transform = 'translateX(20px)';
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'translateX(0)';
+                            }, 100 + (index * 50));
+                        });
+                    }
+                });
+            });
+            
+            // Smooth scroll for navigation
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Open the target module
+                    setTimeout(() => {
+                        const content = targetElement.querySelector('.module-content');
+                        const icon = targetElement.querySelector('.toggle-icon');
+                        
+                        if (!content.classList.contains('active')) {
+                            content.classList.add('active');
+                            icon.classList.add('icon-rotate');
+                            targetElement.classList.add('active');
+                            
+                            // Animate list items
+                            const listItems = content.querySelectorAll('li');
+                            listItems.forEach((item, index) => {
+                                item.style.opacity = '0';
+                                item.style.transform = 'translateX(20px)';
+                                setTimeout(() => {
+                                    item.style.opacity = '1';
+                                    item.style.transform = 'translateX(0)';
+                                }, 100 + (index * 50));
+                            });
+                        }
+                    }, 500);
+                });
+            });
+            
+            // Open the first module by default
+            const firstModule = document.querySelector('.module-content');
+            const firstIcon = document.querySelector('.module-header .toggle-icon');
+            const firstCard = document.querySelector('.module-card');
+            firstModule.classList.add('active');
+            firstIcon.classList.add('icon-rotate');
+            firstCard.classList.add('active');
+            
+            // Animate list items in first module
+            const listItems = firstModule.querySelectorAll('li');
+            listItems.forEach((item, index) => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateX(20px)';
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateX(0)';
+                }, 500 + (index * 50));
+            });
+            
+            // Add hover effect to nav items
+            const navItems = document.querySelectorAll('nav a');
+            navItems.forEach(item => {
+                item.addEventListener('mouseover', function() {
+                    navItems.forEach(navItem => {
+                        if (navItem !== this) {
+                            navItem.style.opacity = '0.6';
+                        }
+                    });
+                });
+                
+                item.addEventListener('mouseout', function() {
+                    navItems.forEach(navItem => {
+                        navItem.style.opacity = '1';
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
