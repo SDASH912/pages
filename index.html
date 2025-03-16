@@ -116,8 +116,7 @@
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
-            display: flex;
-            justify-content: flex-start;
+            display: flex;            justify-content: center;
             flex-wrap: nowrap;
             gap: 0.5rem;
             padding: 0 1rem;
@@ -255,6 +254,8 @@
             font-weight: 500;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
             border: 1px solid rgba(255, 87, 34, 0.05);
+            cursor: pointer;
+            position: relative;
         }
         
         .module-content li:before {
@@ -332,6 +333,89 @@
             animation: float 6s ease-in-out infinite;
         }
         
+        /* Video Modal Styles */
+        .video-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .video-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .video-container {
+            width: 90%;
+            max-width: 1000px;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.4s ease;
+        }
+        
+        .video-modal.active .video-container {
+            transform: scale(1);
+        }
+        
+        .video-container video {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .close-video {
+            position: absolute;
+            top: -40px;
+            right: -10px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: rgba(255, 87, 34, 0.7);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .close-video:hover {
+            background: var(--primary);
+            transform: rotate(90deg);
+        }
+        
+        .video-title {
+            color: white;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .play-icon {
+            position: absolute;
+            right: 10px;
+            color: var(--primary);
+            font-size: 1.2rem;
+            opacity: 0.7;
+        }
+        
+        .module-content li:hover .play-icon {
+            opacity: 1;
+            transform: scale(1.2);
+        }
+        
         /* Mobile Responsive Styles */
         @media (max-width: 768px) {
             .module-content ul {
@@ -352,14 +436,13 @@
             }
             
             .nav-container {                
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center; 
-            flex-wrap: nowrap;
-            gap: 0.5rem;
-            padding: 0 1rem;
-
+                max-width: 1200px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: center; 
+                flex-wrap: nowrap;
+                gap: 0.5rem;
+                padding: 0 1rem;
             }
             
             nav a {
@@ -404,6 +487,18 @@
             .module-card {
                 margin-bottom: 1rem;
                 border-radius: 18px;
+            }
+            
+            .video-title {
+                font-size: 1.2rem;
+            }
+            
+            .close-video {
+                top: -35px;
+                right: -5px;
+                width: 35px;
+                height: 35px;
+                font-size: 1.5rem;
             }
         }
         
@@ -467,14 +562,14 @@
             </div>
             <div class="module-content">
                 <ul>
-                    <li>Танысу</li>
-                    <li>Жауапкершілік</li>
-                    <li>Арман Мақсат жазу</li>
-                    <li>ИП ашу</li>
-                    <li>Kaspi pay регистрация жасау</li>
-                    <li class="new-item">Kaspi магазинге одобрение алу жолдары</li>
-                    <li>Kaspi касса қосу</li>
-                    <li>ИП налогтары от и до</li>
+                    <li data-video="videos/tanysu.mp4">Танысу <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/zhauapkershilik.mp4">Жауапкершілік <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/arman.mp4">Арман Мақсат жазу <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/ip_ashu.mp4">ИП ашу <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/kaspi_pay.mp4">Kaspi pay регистрация жасау <i class="fas fa-play-circle play-icon"></i></li>
+                    <li class="new-item" data-video="videos/odobrenie.mp4">Kaspi магазинге одобрение алу жолдары <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/kassa.mp4">Kaspi касса қосу <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/nalogi.mp4">ИП налогтары от и до <i class="fas fa-play-circle play-icon"></i></li>
                 </ul>
             </div>
         </div>
@@ -486,13 +581,13 @@
             </div>
             <div class="module-content">
                 <ul>
-                    <li>Ашық категория және жабық категория</li>
-                    <li>Анализ жасау</li>
-                    <li>Маржа есептеу</li>
-                    <li>Закуп жасау</li>
-                    <li class="new-item">Алипей регистрация</li>
-                    <li>1688 регистрация</li>
-                    <li>Пиндуодо</li>
+                    <li data-video="videos/kategoriya.mp4">Ашық категория және жабық категория <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/analiz.mp4">Анализ жасау <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/marzha.mp4">Маржа есептеу <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/zakup.mp4">Закуп жасау <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/alipay.mp4">Алипей регистрация <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/1688.mp4">1688 регистрация <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/pinduodo.mp4">Пиндуодо <i class="fas fa-play-circle play-icon"></i></li>
                 </ul>
             </div>
         </div>
@@ -504,13 +599,13 @@
             </div>
             <div class="module-content">
                 <ul>
-                    <li>Кaspi магазин ашылды</li>
-                    <li>Кабинет настройкасын жасау</li>
-                    <li>Магазин аты, Логотип</li>
-                    <li>Доставка түрлерін қосу</li>
-                    <li>Товар салудың 2 түрі</li>
-                    <li>Демпинг</li>
-                    <li>Упаковка ережелері</li>
+                    <li data-video="videos/magazin_ashyldy.mp4">Кaspi магазин ашылды <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/kabinet.mp4">Кабинет настройкасын жасау <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/logo.mp4">Магазин аты, Логотип <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/dostavka.mp4">Доставка түрлерін қосу <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/tovar_salu.mp4">Товар салудың 2 түрі <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/demping.mp4">Демпинг <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/upakovka.mp4">Упаковка ережелері <i class="fas fa-play-circle play-icon"></i></li>
                 </ul>
             </div>
         </div>
@@ -522,10 +617,10 @@
             </div>
             <div class="module-content">
                 <ul>
-                    <li>Предзаказ Таблицамен</li>
-                    <li>Предзаказ ботпен</li>
-                    <li class="new-item">Маркетинг</li>
-                    <li>Быстрые продажи</li>
+                    <li data-video="videos/predzakaz_table.mp4">Предзаказ Таблицамен <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/predzakaz_bot.mp4">Предзаказ ботпен <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/marketing.mp4">Маркетинг <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/fast_sales.mp4">Быстрые продажи <i class="fas fa-play-circle play-icon"></i></li>
                 </ul>
             </div>
         </div>
@@ -537,9 +632,9 @@
             </div>
             <div class="module-content">
                 <ul>
-                    <li>Жасауға болмайтын қателіктер</li>
-                    <li>Возвраттар, отмена</li>
-                    <li>Компенсация алу</li>
+                    <li data-video="videos/mistakes.mp4">Жасауға болмайтын қателіктер <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/vozvrat.mp4">Возвраттар, отмена <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/compensation.mp4">Компенсация алу <i class="fas fa-play-circle play-icon"></i></li>
                 </ul>
             </div>
         </div>
@@ -551,9 +646,20 @@
             </div>
             <div class="module-content">
                 <ul>
-                    <li>Поставщиктер каналы</li>
-                    <li class="new-item">100 Топ Ниша</li>
+                    <li data-video="videos/postavshiki.mp4">Поставщиктер каналы <i class="fas fa-play-circle play-icon"></i></li>
+                    <li data-video="videos/top_nisha.mp4">100 Топ Ниша <i class="fas fa-play-circle play-icon"></i></li>
                 </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Video Modal -->
+    <div class="video-modal">
+        <div class="video-container">
+            <div class="video-title"></div>
+            <video controls></video>
+            <div class="close-video">
+                <i class="fas fa-times"></i>
             </div>
         </div>
     </div>
@@ -618,9 +724,8 @@
                     ctx.fillStyle = particle.color;
                     ctx.globalAlpha = particle.opacity;
                     ctx.fill();
-                    
-                    // Add glow effect
-                    const gradient = ctx.createRadialGradient(
+                                        // Add glow effect
+                                        const gradient = ctx.createRadialGradient(
                         particle.x, particle.y, 0,
                         particle.x, particle.y, particle.radius * 2
                     );
@@ -772,3 +877,5 @@
     </script>
 </body>
 </html>
+
+        
